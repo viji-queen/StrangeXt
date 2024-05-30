@@ -1,38 +1,65 @@
-.App {
+.carousel-container {
+  position: relative;
+  width: 80%; /* Adjust the width as needed */
+  margin: auto;
+  overflow: hidden;
+  border: 1px solid #ccc; /* Optional: to visually distinguish the carousel container */
+  border-radius: 8px; /* Optional: rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow for better visibility */
+}
+
+.carousel {
+  display: flex;
+}
+
+.carousel-inner {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+}
+
+.card {
+  min-width: 100%; /* Ensure each card takes full width of the container */
+  box-sizing: border-box;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff; /* Default background color if none provided */
+}
+
+.card img {
+  border-radius: 50%;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1; /* Ensure arrows are above other content */
+}
+
+.left-arrow {
+  left: 10px;
+}
+
+.right-arrow {
+  right: 10px;
+}
+h1 {
+  font-family: 'Arial, sans-serif'; /* Change to your preferred font */
+  margin-bottom: 20px; /* Space below the heading */
+  line-height: 1.2; /* Line height for readability */
+  font-size: 2.5em; /* Font size */
+  color: #373939; /* Text color */
+  font-weight: bold; /* Font weight */
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.App{
+  text-align: center;
 }
