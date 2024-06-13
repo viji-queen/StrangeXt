@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useRef, useState} from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -10,6 +10,14 @@ import MapComponent from './MapComponent';
 import {Row, Col} from 'react-bootstrap'
 
 function DetailedModal(user) {
+  const maxLength = 100; // Maximum number of characters allowed
+  const [remainingChars, setRemainingChars] = useState(maxLength);
+  const textareaRef = useRef(null);
+
+  const handleInputChange = () => {
+    const currentLength = textareaRef.current.value.length;
+    setRemainingChars(maxLength - currentLength);
+  };
   return (
     <Modal
     {...user}
@@ -46,7 +54,10 @@ function DetailedModal(user) {
             >
             <Form.Label>Message that you want to send:</Form.Label>
 
-              <Form.Control as="textarea" rows={2}  placeholder={`Hello ${user.fullname}...`} />
+              <Form.Control as="textarea" rows={2}  placeholder={`Hello ${user.fullname}...`}  ref={textareaRef}
+        maxLength={maxLength}
+        onChange={handleInputChange} />
+         <p>{remainingChars} characters remaining</p>
             </Form.Group>
             <Button onClick={()=>{console.log("Message sent.");}}>Send</Button>
 
