@@ -8,7 +8,7 @@ function App() {
   
   return (
     <div className="App">
-      <h1>StrangeXt </h1>
+      <h1 data-test-id='cypress-title'>StrangeXt</h1>
       <span> Text random people out there...</span>
       <AllHome />
     </div>

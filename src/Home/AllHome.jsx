@@ -7,12 +7,18 @@ function AllHome() {
     const [users, setUsers] = useState([])
     const [currentIndex, setCurrentIndex] = useState(0);
     const [filteredUsers, setFilteredUsers] = useState([])
+    const [countries, setCountries] = useState([])
+    const [selectedCountry, setSelectedCountry] =''
+    console.log(currentIndex);
+console.log(users)
     useEffect(()=>{
       const fetchData = async ()=>{
        try{
-        const response = await fetch('https://randomuser.me/api/?nat=ind&results=50')
+        const response = await fetch('https://randomuser.me/api/?nat=ind&results=10')
         const userDetails = await response.json()
         setUsers(userDetails.results)
+        const uniqueCountries = [... new Set(userDetails.results.map(user=> user.location.country))]
+        setCountries(uniqueCountries)
        } catch(err){
         console.log(err);
        }
@@ -31,9 +37,13 @@ function AllHome() {
       const filtered = users.filter(user=>user.dob.age >= minAge && user.dob.age <= maxAge )
       setFilteredUsers(filtered)
     }
+    const handleCountriesChange = ()=>{
+      setSelectedCountry(selectedCountry)
+    }
+    console.log(countries);
   return (
     <>
-    <Filter onFilterChange={handleFilterChange} />
+    <Filter onFilterChange={handleFilterChange} countries={countries} onCountriesChange={handleCountriesChange} />{currentIndex}
     <div className="carousel-container">
     <button onClick={handlePrev} className="arrow left-arrow btn btn-dark" disabled={currentIndex <1}>&lt;</button>
     <div className='carousel'>
@@ -46,6 +56,7 @@ function AllHome() {
 filteredUsers.map((u, index)=>(
    
    <UserCard 
+   data-test-id= {`${u.login.username}`}
    key={u.login.username}
    fullname={`${u.name.title}. ${u.name.first} ${u.name.last}`}
    name ={u.name.first}
@@ -80,7 +91,7 @@ filteredUsers.map((u, index)=>(
     }
     </div>
     </div>
-    <button onClick={handleNext} className="arrow right-arrow btn btn-dark" disabled={currentIndex >= users.length} >&gt;</button>
+    <button onClick={handleNext} className="arrow right-arrow btn btn-dark" disabled={filteredUsers.length >0 ?  currentIndex === filteredUsers.length/2 : currentIndex === users.length/2} >&gt;</button>
     </div>
     </>
   )

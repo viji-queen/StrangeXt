@@ -18,6 +18,9 @@ function DetailedModal(user) {
     const currentLength = textareaRef.current.value.length;
     setRemainingChars(maxLength - currentLength);
   };
+  const handleSubmit=()=>{
+    console.log("submitted");
+  }
   return (
     <Modal
     {...user}
@@ -47,7 +50,7 @@ function DetailedModal(user) {
       <div>Email: {user.email}</div>
  
           <MapComponent lat={user.lat} lng={user.lng} country={user.country} />
-            <Form>
+            <Form onSubmit={handleSubmit}>
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"

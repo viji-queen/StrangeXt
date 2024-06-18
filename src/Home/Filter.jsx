@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function Filter({onFilterChange }) {
+function Filter({onFilterChange , countries, onCountriesChange}) {
   const [ageFilter, setAgeFilter] =  useState(false)
   const [countryFilter, setCountryFilter] = useState(false)
   const handleFilterClick = (minAge, maxAge) => {
@@ -22,7 +22,7 @@ function Filter({onFilterChange }) {
 
      
     </div>
-    <div className='d-flex justify-content-center my-3'>
+    <div className='d-flex justify-content-center my-3 '>
       {ageFilter ? 
       <>
               <button className='btn btn-light text-black p-1 px-2 mx-5 ' onClick={() => handleFilterClick(0, 25)}>25 and below</button>
@@ -34,6 +34,25 @@ function Filter({onFilterChange }) {
 
       </>:
       <></>  
+      }
+    
+      </div>
+      <div className='d-flex flex-wrap justify-content-center'>
+      {
+        countryFilter ? 
+        <>
+        {
+     
+        countries.map((country)=>(
+         
+     
+          <button className='btn btn-light text-black m-1 ' key={country}>{country}</button>
+         
+         ))
+       
+        
+        }
+        </> :<></>
       }
       </div>
     </>
